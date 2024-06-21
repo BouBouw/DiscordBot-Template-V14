@@ -1,0 +1,16 @@
+{
+    "global": {
+        "error": "",
+        "permission": ""
+    },
+    "src": {
+        "commands": {
+            "utils": {
+                "ping": "Pong!"
+            }
+        },
+        "events": {
+
+        }
+    }
+}
