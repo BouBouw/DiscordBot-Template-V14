@@ -1,0 +1,76 @@
+<% console.log(user.guilds) %>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="stylesheets.css">
+
+        <title>Discord Template - Dashboard</title>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://kit.fontawesome.com/faa656be40.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="bg-white">
+        <%- include('../Partials/headers.ejs'); %>
+        <main class="ml-32 mt-44">
+            <span class="uppercase font-extrabold text-lg">
+                Dashboard
+            </span>
+            <div class="mt-10">
+                <div class="flex flex-row items-center space-x-5">
+                    <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png?width=160&height=160/" alt="avatar" class="rounded-full w-24">
+                    <div class="flex flex-col">
+                        <span class="text-xl font-bold">
+                            <%= user.global_name %>
+                        </span>
+                        <small>
+                            <%= user.email %>
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <section class="mt-12">
+                <span class="uppercase font-extrabold text-lg">
+                    Servers
+                </span>
+                <div class="mt-5" id="">
+                    <ul class="" id="container">
+                        <% user.guilds.forEach(function (item, index) { %>
+                            <li id="item">
+                                <div class="">
+                                    <% if (item.icon) { %>
+                                        <a href="/servers/<%= item.id %>">
+                                            <img src="https://cdn.discordapp.com/icons/<%= item.id %>/<%= item.icon %>.png" alt="guild" class="w-24 rounded-full">
+                                        </a>
+                                    <% } else { %>
+                                        <a href="/servers/<%= item.id %>">
+                                            <canvas class="avatar-icon" id="<%= item.name.replace(/\w+/g, name => name[0]).replace(/\s/g, '') %>" width="70px" height="70px"></canvas>
+                                            <script>
+                                                function createIcon() {
+                                                    const nameAcronym = document.getElementById("<%= item.name.replace(/\w+/g, name => name[0]).replace(/\s/g, '')  %>").getContext('2d');
+                                                    nameAcronym.font = '15px Poppins';
+                                                    nameAcronym.textAlign = "center";
+                                                    nameAcronym.fillStyle = "white";
+                                                    nameAcronym.fillText("<%= item.name.replace(/\w+/g, name => name[0]).replace(/\s/g, '')  %>", 24, 24);
+                                                }
+                                                createIcon();
+                                            </script>
+                                        </a>
+                                    <%}%>
+                                </div>
+                            </li>
+                        <% }) %>
+                    </ul>
+                </div>
+            </section>
+            <section class="mt-10 mb-10">
+                <a href="/logout" class="bg-red-500 text-white p-2 rounded-lg w-24">
+                    Log Out
+                </a>
+            </section>
+        </main>
+    </body>
+</html>

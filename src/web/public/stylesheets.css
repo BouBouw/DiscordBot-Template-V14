@@ -1,0 +1,21 @@
+body {
+    background: #0b6df7;
+}
+
+#container {
+    position: relative;
+    left: 0px;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 25px;
+    width: auto;
+    margin: auto;
+    border: solid 1px black;
+    border-radius: 15px;
+}
+
+#item {
+    width: 100px;
+    height: 100px;
+  }

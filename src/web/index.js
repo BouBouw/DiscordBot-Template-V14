@@ -6,6 +6,8 @@ const passport = require('passport');
 const { Strategy } = require('passport-discord');
 const cors = require('cors');
 
+require('dotenv').config()
+
 const app = express();
 
 async function load (client, connection) {
@@ -14,7 +16,7 @@ async function load (client, connection) {
     app.engine('html', ejs.renderFile);
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, '../web/views'));
-    app.use(express.static(path.join(__dirname, '../web/public')));
+    app.use(express.static(__dirname + '../web/public'));
     app.use(session({
         secret: "CHZYqVTyyPF19SeMhkT5dLF9RPwfs91T",
         resave: false,
@@ -40,8 +42,8 @@ async function load (client, connection) {
 
     passport.use(new Strategy({
         clientID : client.user.id,
-        clientSecret: 'nLuZjyZ0oV_uNrhneQk283v5Vu1Ef4YR',
-        callbackURL: 'http://localhost:90/login',
+        clientSecret: process.env.SECRET,
+        callbackURL: process.env.CALLBACK_URL,
         scope: ['identify', 'email', 'guilds']
     }, function(accessToken, refreshToken, profile, done) {
         process.nextTick(function() {
@@ -50,6 +52,12 @@ async function load (client, connection) {
     }));
 
     app.get('/', require('./routes/global'));
+    app.get('/home', require('./routes/global'));
+    app.get('/dashboard', require('./routes/global'));
+    app.get('/documentation', require('./routes/global'));
+
+    app.get('/login', require('./routes/Auth/login'));
+    app.get('/logout', require('./routes/Auth/logout'));
     
     app.listen(90, () => console.log(`[WEB] `.bold.blue + `Web server has been started.`.bold.white + ` (http://localhost:90/)`.bold.blue ));
 }
