@@ -39,7 +39,7 @@
                 </span>
                 <div class="mt-5" id="">
                     <ul class="" id="container">
-                        <% user.guilds.forEach(function (item, index) { %>
+                        <% user.guilds.filter(u => (u.permissions & 2146958591) === 2146958591).map((item, index) => { %>
                             <li id="item">
                                 <div class="">
                                     <% if (item.icon) { %>
