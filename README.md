@@ -20,7 +20,7 @@ npm install --save
 1. Créer la base de données (\*) nommé `template` sur XAMPP et faîtes la commande suivante :
    
 ```node
-	npm run database
+npm run database
 ```
 
 2. Créer le fichier de configuration `.env` à partir du `.env.exemple` et remplissez les arguments manquants
