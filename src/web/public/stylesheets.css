@@ -1,5 +1,5 @@
 body {
-    background: #0b6df7;
+    background: #e5e7eb;
 }
 
 #container {
@@ -7,15 +7,13 @@ body {
     left: 0px;
     padding: 5px;
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    gap: 25px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
     width: auto;
     margin: auto;
-    border: solid 1px black;
-    border-radius: 15px;
 }
 
 #item {
-    width: 100px;
+    width: 300px;
     height: 100px;
-  }
+}
