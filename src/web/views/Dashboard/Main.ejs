@@ -43,14 +43,14 @@
                             <li id="item">
                                 <div class="">
                                     <% if (item.icon) { %>
-                                        <a href="/servers/<%= item.id %>" class="bg-gray-900 p-1 flex flex-row space-x-2 items-center rounded-lg">
+                                        <a href="/servers/<%= item.id %>" class="bg-gray-900 hover:bg-gray-800 p-1 flex flex-row space-x-2 items-center rounded-lg">
                                             <img src="https://cdn.discordapp.com/icons/<%= item.id %>/<%= item.icon %>.png" alt="guild" class="w-12 rounded-full">
                                             <span class="text-white font-semibold">
                                                 <%= item.name %>
                                             </span>
                                         </a>
                                     <% } else { %>
-                                        <a href="/servers/<%= item.id %>"  class="bg-gray-900 p-1 flex flex-row space-x-2 items-center rounded-lg">
+                                        <a href="/servers/<%= item.id %>"  class="bg-gray-900 hover:bg-gray-800 p-1 flex flex-row space-x-2 items-center rounded-lg">
                                             <canvas class="avatar-icon" id="<%= item.name.replace(/\w+/g, name => name[0]).replace(/\s/g, '') %>" width="48px" height="48px"></canvas>
                                             <script>
                                                 function createIcon() {
