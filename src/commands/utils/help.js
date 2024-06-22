@@ -7,7 +7,6 @@ module.exports = {
     type: ApplicationCommandType.ChatInput,
 execute: async (client, interaction, args, con) => {
     let page = 0;
-    await GetAllCommands(client);
 
     const row = new ActionRowBuilder()
     .addComponents(
@@ -55,17 +54,136 @@ execute: async (client, interaction, args, con) => {
             title: `Help Page :`,
             fields: [
                 {
-                    name: `Categorie`,
-                    value: `Commands`
+                    name: `\u200b`,
+                    value: `Commands Count : \`${GetAllCommands.CommandSize(client)}\``
                 }
             ],
             footer: {
-                text: `Page : ${page}/0`
+                text: `Page : ${page}/${GetAllCommands.CategorySize(client)}`
             }
         }],
         components: [ row, row_1 ]
     }).then(async (msg) => {
-        
+        const filter = (i) => i.user.id === interaction.member.id;
+        await Buttons();
+
+        async function Buttons() {
+            let collected;
+            try {
+                collected = await msg.awaitMessageComponent({ filter: filter });
+            } catch(err) {
+                if(err.code === 'INTERACTION_COLLECTOR_ERROR') {
+                    return msg.delete();
+                }
+            }
+
+            if(!collected.deffered) await collected.deferUpdate();
+
+            switch(collected.customId) {
+                case 'Help.FirstPage': {
+                    page = 1;
+
+                    msg.edit({
+                        embeds: [{
+                            color: Colors.Orange,
+                            title: `Help Page :`,
+                            fields: [
+                                {
+                                    name: `${await GetAllCommands.GetCategoryByPage(client, page)}`,
+                                    value: `${(await GetAllCommands.GetCommandByCategories(client, page)).join(', ')}`
+                                }
+                            ],
+                            footer: {
+                                text: `Page : ${page}/${GetAllCommands.CategorySize(client)}`
+                            }
+                        }],
+                        components: [ row, row_1 ]
+                    });
+
+                    await Buttons();
+                    break;
+                }
+
+                case 'Help.PreviousPage': {
+                    page = page - 1;
+                    if(page <= 0) return page = 1;
+
+                    msg.edit({
+                        embeds: [{
+                            color: Colors.Orange,
+                            title: `Help Page :`,
+                            fields: [
+                                {
+                                    name: `${await GetAllCommands.GetCategoryByPage(client, page)}`,
+                                    value: `${(await GetAllCommands.GetCommandByCategories(client, page)).join(', ')}`
+                                }
+                            ],
+                            footer: {
+                                text: `Page : ${page}/${GetAllCommands.CategorySize(client)}`
+                            }
+                        }],
+                        components: [ row, row_1 ]
+                    });
+
+                    await Buttons();
+                    break;
+                }
+
+                case 'Help.Delete': {
+                    msg.delete();
+                    break;
+                }
+
+                case 'Help.NextPage': {
+                    page = page + 1;
+                    if(page >= Number(GetAllCommands.CategorySize(client))) return page = Number(GetAllCommands.CategorySize(client));
+
+                    msg.edit({
+                        embeds: [{
+                            color: Colors.Orange,
+                            title: `Help Page :`,
+                            fields: [
+                                {
+                                    name: `${await GetAllCommands.GetCategoryByPage(client, page)}`,
+                                    value: `${(await GetAllCommands.GetCommandByCategories(client, page)).join(', ')}`
+                                }
+                            ],
+                            footer: {
+                                text: `Page : ${page}/${GetAllCommands.CategorySize(client)}`
+                            }
+                        }],
+                        components: [ row, row_1 ]
+                    });
+
+                    await Buttons();
+                    break;
+                }
+
+                case 'Help.LastPage': {
+                    page = Number(GetAllCommands.CategorySize(client));
+
+                    msg.edit({
+                        embeds: [{
+                            color: Colors.Orange,
+                            title: `Help Page :`,
+                            fields: [
+                                {
+                                    name: `${await GetAllCommands.GetCategoryByPage(client, page)}`,
+                                    value: `${(await GetAllCommands.GetCommandByCategories(client, page)).join(', ')}`
+                                }
+                            ],
+                            footer: {
+                                text: `Page : ${page}/${GetAllCommands.CategorySize(client)}`
+                            }
+                        }],
+                        components: [ row, row_1 ]
+                    });
+
+                    await Buttons();
+                    break;
+                }
+            }
+        }
     })
     }
 }
