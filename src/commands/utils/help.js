@@ -106,7 +106,7 @@ execute: async (client, interaction, args, con) => {
 
                 case 'Help.PreviousPage': {
                     page = page - 1;
-                    if(page <= 0) return page = 1;
+                    if(page <= 0) page = 1;
 
                     msg.edit({
                         embeds: [{
@@ -130,13 +130,13 @@ execute: async (client, interaction, args, con) => {
                 }
 
                 case 'Help.Delete': {
-                    msg.delete();
+                    collected.message.delete();
                     break;
                 }
 
                 case 'Help.NextPage': {
                     page = page + 1;
-                    if(page >= Number(GetAllCommands.CategorySize(client))) return page = Number(GetAllCommands.CategorySize(client));
+                    if(page >= Number(GetAllCommands.CategorySize(client))) page = Number(GetAllCommands.CategorySize(client));
 
                     msg.edit({
                         embeds: [{

@@ -38,36 +38,31 @@
                     Servers
                 </span>
                 <div class="mt-5" id="">
-                    <ul class="" id="container">
+                    <ul class="relative left-0 p-0 grid grid-cols-4 gap-3 mx-auto w-auto" id="">
                         <% user.guilds.filter(u => (u.permissions & 2146958591) === 2146958591).map((item, index) => { %>
-                            <li id="item">
-                                <div class="">
+                            <li class="bg-black/10 hover:shadow-xl w-96 p-2 rounded-lg" id="">
+                                <a href="/servers/<%= item.id %>" class="flex flex-row space-x-2">
                                     <% if (item.icon) { %>
-                                        <a href="/servers/<%= item.id %>" class="bg-gray-900 hover:bg-gray-800 p-1 flex flex-row space-x-2 items-center rounded-lg">
-                                            <img src="https://cdn.discordapp.com/icons/<%= item.id %>/<%= item.icon %>.png" alt="guild" class="w-12 rounded-full">
-                                            <span class="text-white font-semibold">
+                                        <img src="https://cdn.discordapp.com/icons/<%= item.id %>/<%= item.icon %>.png" alt="guild" class="w-12 rounded-full">
+                                        <div class="flex flex-col space-x-0">
+                                            <span class="font-bold">
                                                 <%= item.name %>
                                             </span>
-                                        </a>
+                                            <small>
+                                                <%= item.id %>
+                                            </small>
+                                        </div>
                                     <% } else { %>
-                                        <a href="/servers/<%= item.id %>"  class="bg-gray-900 hover:bg-gray-800 p-1 flex flex-row space-x-2 items-center rounded-lg">
-                                            <canvas class="avatar-icon" id="<%= item.name.replace(/\w+/g, name => name[0]).replace(/\s/g, '') %>" width="48px" height="48px"></canvas>
-                                            <script>
-                                                function createIcon() {
-                                                    const nameAcronym = document.getElementById("<%= item.name.replace(/\w+/g, name => name[0]).replace(/\s/g, '')  %>").getContext('2d');
-                                                    nameAcronym.font = '15px Poppins';
-                                                    nameAcronym.textAlign = "center";
-                                                    nameAcronym.fillStyle = "white";
-                                                    nameAcronym.fillText("<%= item.name.replace(/\w+/g, name => name[0]).replace(/\s/g, '')  %>", 24, 24);
-                                                }
-                                                createIcon();
-                                            </script>
-                                            <span class="text-white font-semibold">
+                                        <div class="flex flex-col space-x-0">
+                                            <span class="font-bold">
                                                 <%= item.name %>
                                             </span>
-                                        </a>
-                                    <%}%>
-                                </div>
+                                            <small>
+                                                <%= item.id %>
+                                            </small>
+                                        </div>
+                                    <% } %>
+                                </a>
                             </li>
                         <% }) %>
                     </ul>

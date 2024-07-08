@@ -1,0 +1,51 @@
+<% console.log(server) %>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="stylesheets.css">
+
+        <title>Discord Template - Dashboard</title>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://kit.fontawesome.com/faa656be40.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <%- include('../Partials/headers.ejs'); %>
+        <main class="ml-32 mt-44">
+            <span class="uppercase font-extrabold text-2xl">
+                Servers > <%= server.guild.name %>
+            </span>
+            <section class="mt-10">
+                <div class="flex flex-row space-x-2">
+                    <img src="https://cdn.discordapp.com/icons/<%= server.guild.id %>/<%= server.guild.icon %>.png" alt="guild_icon" class="w-16 rounded-full">
+                    <div class="flex flex-col space-y-1">
+                        <p class="flex flex-row space-x-1 items-center">
+                            <i class="fa-solid fa-globe"></i>
+                            <span class="uppercase font-bold">
+                                Language
+                            </span>
+                        </p>
+                        <select class="p-1 bg-gray-200 rounded-md w-36">
+                            <option value="EN_en">English</option>
+                            <option value="FR_fr">Français</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+            <section class="mt-16">
+                <span class="uppercase font-extrabold text-xl">
+                    Ticket(s) : 0
+                </span>
+            </section>
+            <section class="mt-16">
+                <span class="uppercase font-extrabold text-xl">
+                    Sanction(s) : 0
+                </span>
+            </section>
+        </main>
+    </body>
+</html>

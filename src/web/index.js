@@ -56,6 +56,8 @@ async function load (client, connection) {
     app.get('/dashboard', require('./routes/global'));
     app.get('/documentation', require('./routes/global'));
 
+    app.get('/servers/:guildId', require('./routes/servers'));
+
     app.get('/login', require('./routes/Auth/login'));
     app.get('/logout', require('./routes/Auth/logout'));
     

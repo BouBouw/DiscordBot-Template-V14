@@ -1,0 +1,12 @@
+{
+    "levels": [
+        {
+            "name": "Novice",
+            "experience": 150
+        },
+        {
+            "name": "Master",
+            "experience": 500
+        }
+    ]
+}

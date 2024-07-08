@@ -1,7 +1,3 @@
-const { readdirSync } = require('node:fs');
-const { lstat } = require('node:fs/promises');
-const { join } = require('node:path');
-
 const CommandSize = (client) => {
     return client.commands.size
 }
@@ -41,8 +37,6 @@ const GetCommandByCategories = async (client, page) => {
     });
 
     await client.commands.map((command) => {
-        console.log(categories[Number(page - 1)]);
-
         if(command.description === categories[Number(page - 1)]) {
             commands.push(`\`${command.name}\``);
         }
