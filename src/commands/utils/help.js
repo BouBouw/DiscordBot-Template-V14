@@ -50,7 +50,7 @@ execute: async (client, interaction, args, con) => {
 
     interaction.reply({
         embeds: [{
-            color: Colors.Orange,
+            color: Colors.Purple,
             title: `Help Page :`,
             fields: [
                 {

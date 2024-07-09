@@ -50,8 +50,41 @@ const ProfileExperienceManager = (guild, user) => {
         const context = canvas.getContext('2d');
 
         const background = await Canvas.loadImage('https://imgur.com/64vyfCx.jpg');
-
         context.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+        context.font = '26px sans-serif';
+	    context.fillStyle = '#ffffff';
+	    context.fillText(`Badge(s) :`, 250, 75);
+
+        context.font = '24px sans-serif';
+        context.fillStyle = '#ffffff';
+        context.fillText(`Rank : ${currentRank.currentLevel.name}`, 250, 180);
+
+        context.font = '20px sans-serif';
+	    context.fillStyle = '#ffffff';
+	    context.fillText(`${currentExp} exp.`, 570, 180);
+
+        function drawRoundedRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+
+        context.fillStyle = '#000000';
+        drawRoundedRect(context, 250, 190, 400, 20, 12.5);
+        context.fill();
+
+        context.fillStyle = '#ffffff';
+        drawRoundedRect(context, 250, 190, (currentExp / currentRank.nextLevel.experience) * 400, 20, 12.5);
+        context.fill();
 
         context.beginPath();
         context.arc(125, 125, 100, 0, Math.PI * 2, true);

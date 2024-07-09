@@ -10,7 +10,7 @@ execute: async (client, interaction, args, con) => {
 
     interaction.reply({
         embeds: [{
-            color: Colors.Blue,
+            color: Colors.Purple,
             title: `${interaction.user.username}'s Profile`,
             thumbnail: {
                 url: interaction.user.avatarURL(),
