@@ -1,5 +1,6 @@
 const { ApplicationCommandType, Colors } = require('discord.js')
-const Levels = require('../../../handlers/functions/database/Levels')
+const Levels = require('../../../handlers/functions/database/Levels');
+const LangageManager = require('../../../handlers/langs/langageDetector');
 
 module.exports = {
     name: 'profile',
@@ -16,6 +17,10 @@ execute: async (client, interaction, args, con) => {
                 url: interaction.user.avatarURL(),
             },
             fields: [
+                {
+                    name: `Global :`,
+                    value: `Lang : ${await LangageManager.LangageSelector(await LangageManager.UserLanguageDetector(interaction.user.id))}`
+                },
                 {
                     name: `Level :`,
                     value: `Rank : ${currentProfile.currentRank.currentLevel.name}\nExp : ${currentProfile.currentExp}`

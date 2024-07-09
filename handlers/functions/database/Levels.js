@@ -56,6 +56,8 @@ const ProfileExperienceManager = (guild, user) => {
 	    context.fillStyle = '#ffffff';
 	    context.fillText(`Badge(s) :`, 250, 75);
 
+        // Add Badges : V@2.X.X
+
         context.font = '24px sans-serif';
         context.fillStyle = '#ffffff';
         context.fillText(`Rank : ${currentRank.currentLevel.name}`, 250, 180);
