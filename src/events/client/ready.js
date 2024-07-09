@@ -1,4 +1,4 @@
-const { ActivityType, ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors} = require('discord.js');
+const { ActivityType } = require('discord.js');
 
 module.exports = {
 	name: 'ready',

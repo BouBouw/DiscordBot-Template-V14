@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@napi-rs/canvas": "^0.1.53",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
     "discord.js": "^14.15.3",
