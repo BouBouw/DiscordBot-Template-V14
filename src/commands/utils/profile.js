@@ -15,7 +15,7 @@ execute: async (client, interaction, args, con) => {
     .addComponents(
         new ButtonBuilder()
         .setLabel(`${interaction.user.username}'s Profile`)
-        .setURL(`https://localhost:90/profile?userID=${interaction.user.id}`)
+        .setURL(`http://localhost:90/profile/${interaction.user.id}`)
         .setStyle(ButtonStyle.Link)
     )
 
@@ -57,6 +57,7 @@ execute: async (client, interaction, args, con) => {
         }],
         files: [ currentProfile.rankData.image_banner ],
         components: [ row ],
-    })
+    });
+
     }
 }
